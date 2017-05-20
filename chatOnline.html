@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<title>chatOnLine page</title>
+	<link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="chat.css"> -->
+	<style type="text/css">
+	*{
+		padding:0;
+		margin:0;
+	}
+		body{
+
+			background:url(background.jpeg);
+			background-attachment: fixed;
+			background-repeat: no-repeat;
+			background-size:100% 100%;
+
+
+			
+		}
+		.scrollstyle::-webkit-scrollbar-track
+		{
+			-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+			border-radius: 10px;
+			background-color: white;
+		}
+
+		.scrollstyle::-webkit-scrollbar
+		{
+			width: 6px;
+			background-color:white;
+		}
+
+		.scrollstyle::-webkit-scrollbar-thumb
+		{
+			border-radius: 10px;
+			-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+			background-color: #129fea;
+		}
+		.navbar{
+			border-radius: 10px;
+			
+
+		}
+		.navbar-header a{
+			transition-duration:0.8s;
+			padding-top:15px;
+			color:white;
+		}
+        .navbar-header a i{
+            font-size:20px;
+			font-weight: bold;
+			color:white;
+
+
+             
+        }
+        .navbar-header a:hover{
+         background: red;
+        }
+        .navbar-nav  {
+        	margin-left:70px;
+        }
+        .navbar-nav li{
+        	margin:auto 20px;
+        	font-weight: bold;
+        	color:white;
+        }
+        .navbar-nav li a{
+        	transition-duration: 0.8s;
+        	color:white;
+        }
+        .navbar-nav li a:hover{
+        	background: red;
+        }
+        .chatui{
+        	padding-top:30px;
+        	height:550px;
+        
+        }
+        .chatui .users-list{
+
+        	/*background:rgba(255,255,255,0.5);*/
+        	height:550px;
+        	border-top-right-radius: 8px;
+        	border-top-left-radius: 8px;
+        	
+        }
+        .chatui .users-list .online-title{
+        	
+        	height:40px;
+        	border-top-right-radius: 8px;
+        	border-top-left-radius: 8px;
+        	background:#129fea;
+        }
+        .online-title p{
+        	font-size: 15px;
+        	color:white;
+        	text-align: center;
+        	line-height: 40px;
+        	font-weight: bold;
+        }
+        .chatui .users-list .online-users{
+        	
+        	height:470px;
+            overflow: auto;
+        	background:rgba(255,255,255,0.5);
+        }
+        .chatui .users-list .online-users ul .userlist-item{
+          cursor: pointer;
+          border-bottom: 1px solid black;
+          height: 47px;
+          list-style: none;
+          transition-duration: 0.8s;
+        }
+        .chatui .users-list .online-users ul .userlist-item:hover{
+        	background:rgba(0,0,0,0.5);
+        	border-right: 4px solid orange;
+        	color:white;
+        }
+        .chatui .users-list .online-users ul  .userlist-item .user-image{
+        	display: inline-block;
+        	width:47px;
+        	height: 47px;
+        	line-height: 47px;
+        	
+        	
+        }
+        .user-image img{
+        	width: 41px;
+        	height:41px;
+        	padding:3px 0px;
+        	padding-left:3px;
+        	
+        }
+        .chatui .users-list .online-users ul  .userlist-item .user-name{
+            display: inline-block;
+            
+        	height: 47px;
+        	width: auto;
+        	
+        	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        	font-weight: bold;
+        	line-height: 47px;
+        	font-size: 15px;
+        	padding-left: 30px;
+        	padding-right: 30px;
+        }
+        .chatui .users-list .online-menu{
+        	
+        	height:40px;
+        	
+        	background:rgba(0,0,0,0.8);
+        }
+        .powerby{
+        	display: block;
+        	width: 100%;
+        	height: 100%;
+        	text-align: center;
+        	color: white;
+        	line-height: 47px;
+        	font-weight: bold;
+        	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        	font-size: 10px;
+        }
+        .message-list{
+
+        	
+        	height:550px;
+        	border-top-right-radius: 8px;
+        	border-top-left-radius: 8px;
+        }
+        .message-title{
+        	background:#129fea;
+        	height:40px;
+        	width: 100%;
+        	border-top-right-radius: 8px;
+        	border-top-left-radius: 8px;
+        }
+        .message-title span{
+        	display: inline-block;
+        	height: 40px;
+        	text-align:left;
+
+        	padding-left: 50px;
+        	line-height: 40px;
+        	color:white;
+        }
+        .message-title .time{
+          margin-right: 350px;
+        }
+       
+       .message-title a{
+       	color:white;
+       }
+        
+       
+        .message-area{
+        	
+        	height:430px;
+        	width: 100%;
+        	overflow: auto;
+        	
+        }
+         .message-item{
+        	width:100%;
+        	overflow: auto;
+        	height:auto;
+        	background:rgba(255,255,255,0.5);
+        	padding-top:10px;
+        	padding-bottom: 10px;
+        }
+        .message-item img{
+        	display: inline-block;
+        	width: 40px;
+        	height: 40px;
+        	margin-top:-60px;
+            margin-left: 30px;
+            border-radius: 5px;	
+        }
+  
+        .message{
+        	word-wrap: break-word;
+        	text-indent: 20px;
+            margin-top: 5px;
+        	display: inline-block;
+        	height: auto;
+        	width: 700px;
+        	background: rgba(255,255,255,0.7);
+        	padding-left: 10px;
+        	padding-top: 10px;
+        	border-radius: 2px;
+        	margin-left:30px;
+
+        }
+        
+
+        .message-input{
+        	
+        	height:70px;
+        	width: 100%;
+        	border-top: 4px solid rgba(0,0,0,0.8);
+
+        
+        }
+        .message-input form{
+        	display: block;
+            width: 100%;
+            height: 40px;
+            margin-bottom: 0px;
+            padding-bottom: 0px;
+
+        }
+        .message-input form a{
+          display: inline-block;
+          width: 4%;
+          height: 100%;
+          color:white;
+          background: red;
+        }
+        .message-input form .textarea{
+        	padding: 0px;
+        	margin:0px;
+            outline: none;
+            display: inline-block;
+            width: 100%;
+            height: 40px;
+            background:rgba(255,255,255,0.8);
+            border-width: 0px;
+            padding-bottom: 0px;
+            margin-bottom: 0px;
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+            font-size: 14px;
+            
+            font-style: initial;
+            color:black;
+
+        }
+
+        .friendly{
+        	width: 100%;
+        	height: 30px;
+        	background: rgba(255,0,0,0.5);
+        	text-align: center;
+        	line-height: 30px;
+        	color:white;
+        }
+        .friendly p{
+        	display: block;
+        	width: 100%;
+        	height:100%;
+        	font-size: 18px;
+        	transition-duration: 0.8s;
+        }
+        .friendly p:hover{
+        	background:green;
+        	cursor: pointer;
+        }
+        .navbar-static-top{
+        	background:rgba(0,0,0,0.6);
+
+        }
+	</style>
+
+</head>
+<body>
+   <div class="box" style="min-width: 1200px;
+   min-height: 700px;height: auto;width: auto;margin:0 auto">
+   	  <!-- narbar -->
+    <div class="navbar-wrapper" style="min-width: 1200px;
+  height: auto;width: auto;margin:0 atuo;">
+      <div class="container">
+        <nav class="navbar  navbar-static-top">
+          <div class="container">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="htts://www.github.com/maliaoMJ"><i class="fa fa-github fa-2x">&nbsp;&nbsp;MyGithub</i> </a>
+            </div>
+            <div id="navbar" class="navbar-collapse ">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="#" >Home</a></li>
+                <li><a href="#about" >AboutMe</a></li>
+                <li><a href="#contact" >ContactMe</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+<!-- navbar end -->
+<!-- chat page -->
+<div class="container chatui" style="
+   min-height: 600px;height: auto;width: auto;margin:0 auto">
+	<div class="row">
+	  <div class="col-xs-3 users-list">
+	  	 <div class="online-title">
+	  	 	<p> <i class="fa fa-user-secret"></i> Online populations</p>
+	  	 </div>
+	  	 <div class="online-users scrollstyle" id="scrollstyle">
+	  	 	 <ul>
+	  	 	 	<li class="userlist-item">
+	  	 	 		<div class="user-image">
+	  	 	 			<img src="background.jpeg">
+	  	 	 		</div>
+	  	 	 			<span class="user-name">user name</span>	
+	  	 	 	</li>
+	  	 	 	<li class="userlist-item">
+	  	 	 		<div class="user-image">
+	  	 	 			<img src="background.jpeg">
+	  	 	 		</div>
+	  	 	 			<span class="user-name">user name</span>	
+	  	 	 	</li>
+	  	 	 	<li class="userlist-item">
+	  	 	 		<div class="user-image">
+	  	 	 			<img src="background.jpeg">
+	  	 	 		</div>
+	  	 	 			<span class="user-name">user name</span>	
+	  	 	 	</li>
+	  	 	 	<li class="userlist-item">
+	  	 	 		<div class="user-image">
+	  	 	 			<img src="background.jpeg">
+	  	 	 		</div>
+	  	 	 			<span class="user-name">user name</span>	
+	  	 	 	</li>
+	  	 	 	<li class="userlist-item">
+	  	 	 		<div class="user-image">
+	  	 	 			<img src="background.jpeg">
+	  	 	 		</div>
+	  	 	 			<span class="user-name">user name</span>	
+	  	 	 	</li>
+	  	 	 	<li class="userlist-item">
+	  	 	 		<div class="user-image">
+	  	 	 			<img src="background.jpeg">
+	  	 	 		</div>
+	  	 	 			<span class="user-name">user name</span>	
+	  	 	 	</li>
+	  	 	 	<li class="userlist-item">
+	  	 	 		<div class="user-image">
+	  	 	 			<img src="background.jpeg">
+	  	 	 		</div>
+	  	 	 			<span class="user-name">user name</span>	
+	  	 	 	</li>
+	  	 	 	<li class="userlist-item">
+	  	 	 		<div class="user-image">
+	  	 	 			<img src="background.jpeg">
+	  	 	 		</div>
+	  	 	 			<span class="user-name">user name</span>	
+	  	 	 	</li>
+	  	 	 	<li class="userlist-item">
+	  	 	 		<div class="user-image">
+	  	 	 			<img src="background.jpeg">
+	  	 	 		</div>
+	  	 	 			<span class="user-name">user name</span>	
+	  	 	 	</li>
+	  	 	 	<li class="userlist-item">
+	  	 	 		<div class="user-image">
+	  	 	 			<img src="background.jpeg">
+	  	 	 		</div>
+	  	 	 			<span class="user-name">user name</span>	
+	  	 	 	</li>
+	  	 	 	<li class="userlist-item">
+	  	 	 		<div class="user-image">
+	  	 	 			<img src="background.jpeg">
+	  	 	 		</div>
+	  	 	 			<span class="user-name">user name</span>	
+	  	 	 	</li>
+	  	 	 	<li class="userlist-item">
+	  	 	 		<div class="user-image">
+	  	 	 			<img src="background.jpeg">
+	  	 	 		</div>
+	  	 	 			<span class="user-name">user name</span>	
+	  	 	 	</li>	
+	  	 	 </ul>
+	  	 </div>
+	  	 <div class="online-menu">
+	  	 	 <span class="powerby">Copyright ©2016-2018  Powered By Kael </span>
+	  	 </div>
+
+	  </div>
+	  <div class="col-xs-9 message-list">
+	    <div class="message-title">
+	    	<span class="time"><i class="glyphicon glyphicon-time"></i>&nbsp;<i id="times"></i></span>
+	    	<span class="loginUserName"><i class="glyphicon glyphicon-user"></i>&nbsp;你好,&nbsp;<a href="javascript:void(0);">Keal</a></span>
+	    </div>
+	    <div class="message-area scrollstyle" >
+	        <ul class="">
+	        	<li class="message-item">
+	        	   <img src="background.jpeg">
+	        	  
+	        	   <div class="message" ><p>
+	        	   	messagemessagemessagemessagemessagemessageessagemessagemessagemessagemessageessagemessagemessagemessagemessageessagemessagemessagemessagemessage
+	        	   </p></div>
+	        	</li>
+	        	<li class="message-item" style="float: right;">
+	        	   
+	        	  
+	        	   <div class="message" ><p>
+	        	   	messagemessagemessagemessagemessagemessageessagemessagemessagemessagemessageessagemessagemessagemessagemessageessagemessagemessagemessagemessage
+	        	   </p></div>
+	        	   <img src="background.jpeg">
+	        	</li>
+	        	<li class="message-item">
+	        	   <img src="background.jpeg">
+	        	  
+	        	   <div class="message" ><p>
+	        	   	messagemessagemessagemessagemessagemessageessagemessagemessagemessagemessageessagemessagemessagemessagemessageessagemessagemessagemessagemessage
+	        	   </p></div>
+	        	</li>
+	        	<li class="message-item" style="float: right;">
+	        	   
+	        	  
+	        	   <div class="message" ><p>
+	        	   	messagemessagemessagemessagemessagemessageessagemessagemessagemessagemessageessagemessagemessagemessagemessageessagemessagemessagemessagemessage
+	        	   </p></div>
+	        	   <img src="background.jpeg">
+	        	</li>
+	        	<li class="message-item">
+	        	   <img src="background.jpeg">
+	        	  
+	        	   <div class="message" ><p>
+	        	   	messagemessagemessagemessagemessagemessageessagemessagemessagemessagemessageessagemessagemessagemessagemessageessagemessagemessagemessagemessage
+	        	   </p></div>
+	        	</li>
+	        	<li class="message-item" style="float: right;">
+	        	   
+	        	  
+	        	   <div class="message" ><p>
+	        	   	messagemessagemessagemessagemessagemessageessagemessagemessagemessagemessageessagemessagemessagemessagemessageessagemessagemessagemessagemessage
+	        	   </p></div>
+	        	   <img src="background.jpeg">
+	        	</li>
+	        	<li class="message-item">
+	        	   <img src="background.jpeg">
+	        	  
+	        	   <div class="message" ><p>
+	        	   	messagemessagemessagemessagemessagemessageessagemessagemessagemessagemessageessagemessagemessagemessagemessageessagemessagemessagemessagemessage
+	        	   </p></div>
+	        	</li>
+	        	<li class="message-item" style="float: right;">
+	        	   
+	        	  
+	        	   <div class="message" ><p>
+	        	   	messagemessagemessagemessagemessagemessageessagemessagemessagemessagemessageessagemessagemessagemessagemessageessagemessagemessagemessagemessage
+	        	   </p></div>
+	        	   <img src="background.jpeg">
+	        	</li>
+	        	<li class="message-item">
+	        	   <img src="background.jpeg">
+	        	  
+	        	   <div class="message" ><p>
+	        	   	messagemessagemessagemessagemessagemessageessagemessagemessagemessagemessageessagemessagemessagemessagemessageessagemessagemessagemessagemessage
+	        	   </p></div>
+	        	</li>
+	        	<li class="message-item" style="float: right;">
+	        	   
+	        	  
+	        	   <div class="message" ><p>
+	        	   	messagemessagemessagemessagemessagemessageessagemessagemessagemessagemessageessagemessagemessagemessagemessageessagemessagemessagemessagemessage
+	        	   </p></div>
+	        	   <img src="background.jpeg">
+	        	</li>
+
+	        </ul>
+
+	    </div>
+	    <div class="message-input">
+	    	<form action="#" method="post">
+	    		<div class="textarea"  contentEditable="true">
+	    			
+	    		</div>
+	    		
+
+	    	</form>
+	    	<div class="friendly">
+	    		<p><i class="glyphicon glyphicon-send"></i>&nbsp;Send Message</p>
+	    	</div>
+	    </div>
+	  	
+	  </div>
+		
+	</div>
+</div>
+
+
+   </div>
+   
+</body>
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.js"></script>
+<script type="text/javascript">
+	
+	$(document).ready(function(){
+
+        //getTime
+        function getTime(){
+          var date=new Date();
+          var year=date.getFullYear();
+          var month=rightTime((date.getMonth()+1));
+          var day=rightTime(date.getDate());
+          var hour=rightTime(date.getHours());
+          var minutes=rightTime(date.getMinutes());
+          var seconds=rightTime(date.getSeconds());
+            //时间格式化
+          function rightTime(timers){
+               
+               // timers>10 ? return timers : return  '0'+timers;
+               if(timers>10){
+                 return timers;
+               }else{
+                return '0'+timers;
+               }
+        }
+          var nowTime=year+"年"+month+"月"+day+"日 &nbsp;"+hour+":"+minutes+":"+seconds;
+          $('#times').html(nowTime);
+        }
+      
+     setInterval(getTime,1000);
+     //getTime end
+
+
+     
+       
+	});
+
+
+</script>
+</html>
